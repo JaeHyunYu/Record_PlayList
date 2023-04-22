@@ -1,15 +1,21 @@
-import React from 'react';
-import { View, StyleSheet,Text } from 'react-native';
-import * as MediaLibrary from 'expo-media-library';
+import React, {Component} from 'react';
+import {Text, View, StyleSheet, ScrollView} from 'react-native';
+import { AudioContext } from '../context/AudioProvider';
+
+export class AudioList extends Component{
 
 
-const AudioList = () =>{
-    
-    return (
-        <View style={styles.container}>
-            <Text>AudioList</Text>
-        </View>
-    )
+    static contextType = AudioContext
+    render(){
+        return (
+            <ScrollView>
+                {this.context.audioFiles.map(item=>
+                <Text style={{padding:10, borderBottomColor:'red', 
+                borderBottomWidth:2,}} key={item.id}>{item.filename}</Text>)}
+                
+            </ScrollView>
+        )
+    }
 }
 
 const styles=StyleSheet.create({
@@ -20,4 +26,4 @@ const styles=StyleSheet.create({
     }
 })
 
-export default AudioList;
+export default AudioList
